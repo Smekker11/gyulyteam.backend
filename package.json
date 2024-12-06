@@ -1,0 +1,21 @@
+{
+  "name": "gyulyteam.backend",
+  "version": "1.0.0",
+  "description": "backend for social inspiring platform",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gyulyteam.backend"
+  },
+  "author": "MekkerDavid,Aris",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
+  }
+}
