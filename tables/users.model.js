@@ -2,7 +2,7 @@ import { DataTypes, Sequelize } from "sequelize";
 
 const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: '../db/gyulyteamdb.sqlite', //path to local sqlite database
+    storage: './db/gyulyteamdb.sqlite', //path to local sqlite database
 
 });
 
@@ -22,7 +22,7 @@ const Users = sequelize.define('Users', {
         len: [3, 50],  
       }
     },
-    Age: {
+    age: {
         type: DataTypes.INTEGER,
         allowNull: false, 
       },
