@@ -12,8 +12,9 @@ const Today = sequelize.define('Today',{
         primaryKey: true,
         autoIncrement:true
     },
-    user:{
-        type: DataTypes.STRING
+    username:{
+        type: DataTypes.STRING,
+        allowNull: false
     },
     quote: {
         type: DataTypes.STRING,
@@ -23,8 +24,7 @@ const Today = sequelize.define('Today',{
         }
     },
     assigned: {
-        type: DataTypes.JSON,
-        allowNull: false
+        type: DataTypes.JSON
     } 
 },{
     tableName: 'today'
