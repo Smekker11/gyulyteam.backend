@@ -2,6 +2,24 @@ import { Today } from './tables/quotes.today.js';
 import { entryArray } from './samples/ex.quote.js';
 import express from 'express';
 import cors from 'cors';
+import dotenv from "dotenv";
+import {OpenAI} from "openai";
+
+dotenv.config();
+
+// Set up your OpenAI API key
+
+const openai = new OpenAI({
+  apiKey: process.env.AI_TOKEN // This is also the default, can be omitted
+});
+
+const chatCompletion = async(req,res) =>{
+const response = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [{"role": "user", "content":req.body.prompt}],
+  });
+  res.status(200).send(response)
+}
 
 
 const app = express();
@@ -17,7 +35,11 @@ app.use(express.json())
 app.post("/post", addPosts)
 app.get("/post", getPosts)
 
+//ai
+app.post("/ai", chatCompletion)
+
 //app
+
 app.post("/user/task/list", listAssigned)
 
 app.post("/user/task", addQuote)

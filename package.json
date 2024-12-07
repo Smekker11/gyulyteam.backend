@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "backend for social inspiring platform",
   "main": "main.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,7 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "openai": "^4.76.0",
     "sequelize": "^6.37.5",
     "sqlite3": "^5.1.7"
   }
