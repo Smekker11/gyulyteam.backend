@@ -22,9 +22,9 @@ const Users = sequelize.define('Users', {
         len: [3, 50],  
       }
     },
-    age: {
+    points: {
         type: DataTypes.INTEGER,
-        allowNull: false, 
+        defaultValue: 0 
       },
     password: {
         type: DataTypes.STRING,
