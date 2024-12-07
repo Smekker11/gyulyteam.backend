@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 
+
 const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: ':memory:', //path to local sqlite database
@@ -18,20 +19,22 @@ const Today = sequelize.define('Today',{
     },
     quote: {
         type: DataTypes.STRING,
-        allowNull: false,
         validate:{
-            len: [20, 250]
+            len: [20, 350]
         }
     },
     assigned: {
         type: DataTypes.JSON
+    },
+    finished:{
+        type: DataTypes.BOOLEAN
     } 
 },{
     tableName: 'today'
 })
 
 sequelize.sync()
-    .then(() => console.log("DB connection working!"))
+    .then( () => {console.log("DB connection working!");})
     .catch(error => console.log("DB connection failed", error));
   
   
