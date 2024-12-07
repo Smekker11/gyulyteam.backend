@@ -5,6 +5,7 @@ import { Sequelize } from 'sequelize';
 //posts functions
 
 export const addPosts = async (req,res) =>{
+    console.log(req)
     try{
         await Posts.create({
            title: req.body.title,
