@@ -14,12 +14,16 @@ const openai = new OpenAI({
 });
 
 const chatCompletion = async(req,res) =>{
+ try{
     console.log(req.body.prompt)
-const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [{"role": "user", "content":req.body.prompt}],
-  });
-  res.status(200).send(response)
+    const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [{"role": "user", "content":req.body.prompt}],
+      });
+      res.status(200).send(response)
+ }catch(err){
+    res.status(500).send(err)
+ }
 }
 
 
