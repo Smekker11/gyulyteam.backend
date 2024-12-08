@@ -8,10 +8,12 @@ import {OpenAI} from "openai";
 dotenv.config();
 
 // Set up your OpenAI API key
-
+try{
 const openai = new OpenAI({
   apiKey: process.env.AI_TOKEN // This is also the default, can be omitted
-});
+});} catch(err){
+    console.log(err);
+}
 
 const chatCompletion = async(req,res) =>{
  try{
