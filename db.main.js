@@ -52,7 +52,7 @@ export const loginUser = async (req,res) =>{
     try{
     const user = await Users.findOne({
         where:{
-            username: req.body.username,
+            username: req.body.email,
             password: req.body.password
         }, raw: true
     })
@@ -68,7 +68,7 @@ export const loginUser = async (req,res) =>{
 export const listAssigned = async (req,res) =>{
     const user = await Today.findOne({
         where:{
-            username: req.body.username,
+            id: req.body.username,
         }, raw: true
     });
     if(user){
@@ -93,28 +93,68 @@ export const listAssigned = async (req,res) =>{
     }
 }
 
+export const addPoints = async (req,res) =>{
+    const interg = await Users.findOne({
+        where:{
+            username: req.body.username
+        }, raw: true
+    });
+    try {
+        const [updated] = await Users.update(
+          { points: interg.points + req.body.points }, // Set the new points value
+          {
+            where: { username: req.body.username } // Condition to find the user by username
+          }
+        );
+    
+        if (updated) {
+          res.status(200).send(`User's points updated successfully! ` + (interg.points+req.body.points));
+        } else {
+            res.status(400).send(`No user found with the username: ${username}`);
+        }
+      } catch (error) {
+        console.error('Error updating user points:', error);
+      }
+}
+
 export const addQuote = async (req,res) =>{
-    const user = await Today.findOne({
-        where:{username: req.body.username}
-    })
-    if(!user){
         try{
-            await Today.create({username: req.body.username, quote: req.body.quote, assigned: [await getRandId(Today), await getRandId(Today),await getRandId(Today)], finished:false})
+            await Today.create({quote: req.body.quote, assigned: [await getRandId(Today), await getRandId(Today),await getRandId(Today)], finished:false})
             res.status(200).json({status: "Successfully added quote:", quote: req.body.quote})
         } catch (err){
             res.status(500).json({status: "Catastrophic Failure",
                 error: err
             })
         }
-    } else {
-        res.status(403).json({status: false, error: "Bad Request use /user/tasks"})
-    }
 }
 export const listTasks = async (req,res) =>{
     const list = await Today.findAll();
     res.status(200).json(list);
 }
 export const finishTask = async (req,res) => {
+
+}
+export const getTasks = async(req,res) =>{
+    try{
+    const un = await Today.findOne({
+        where:{
+            id: await getRandId(Today)
+        }, raw: true
+    })
+    const doi = await Today.findOne({
+        where:{
+            id: await getRandId(Today)
+        }, raw: true
+    })
+    const tri = await Today.findOne({
+        where:{
+            id: await getRandId(Today)
+        }, raw: true
+    })
+    res.status(200).json({un: un.quote, doi: doi.quote, tri: tri.quote})
+ } catch(err){
+    res.status(500).json({error: err})
+ }
 }
 
 export const getRandId = async (table)=> {

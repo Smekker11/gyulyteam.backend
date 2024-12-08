@@ -15,7 +15,6 @@ const Today = sequelize.define('Today',{
     },
     username:{
         type: DataTypes.STRING,
-        allowNull: false
     },
     quote: {
         type: DataTypes.STRING,

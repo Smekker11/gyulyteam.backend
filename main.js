@@ -14,6 +14,7 @@ const openai = new OpenAI({
 });
 
 const chatCompletion = async(req,res) =>{
+    console.log(req.body.prompt)
 const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
     messages: [{"role": "user", "content":req.body.prompt}],
@@ -26,7 +27,7 @@ const app = express();
 const PORT = 8080;
 app.use(cors({origin: '*'}))
 
-import { addPosts, addQuote, addUser, getPosts, listAssigned, listTasks, loginUser } from './db.main.js';
+import { addPoints, addPosts, addQuote, addUser, getPosts, getTasks, listAssigned, listTasks, loginUser } from './db.main.js';
 import { getRandId } from './db.main.js';
 
 app.use(express.json())
@@ -44,7 +45,11 @@ app.post("/user/task/list", listAssigned)
 
 app.post("/user/task", addQuote)
 
+app.post("/users/points", addPoints)
+
 app.post("/user/tasks", listTasks)
+
+app.post("/users/tasked", getTasks)
 
 app.post("/user/add", addUser)
 
